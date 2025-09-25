@@ -1,10 +1,26 @@
-﻿namespace MongoDBConnector.Tests;
+﻿using Xunit;
+using Testcontainers.MongoDb;
 
-public class MongoDBConnectorTest
+
+namespace MongoDBConnector.Tests
 {
-    [Fact]
-    public void Test1()
+    public class MongoDBConnectorTest : IAsyncLifetime
     {
+        private readonly MongoDbContainer _mongoDbContainer;
 
+        public MongoDBConnectorTest()
+        {
+            _mongoDbContainer = new MongoDbBuilder().Build();
+        }
+
+        public async Task InitializeAsync() => await _mongoDbContainer.StartAsync();
+        public async Task DisposeAsync() => await _mongoDbContainer.DisposeAsync();
+
+        [Fact]
+        public void Ping_ShouldReturnTrue_WhenMongoDBIsRunning()
+        {
+            var connector = new MongoDBConnector(_mongoDbContainer.GetConnectionString());
+            Assert.True(connector.Ping());
+        }
     }
 }
