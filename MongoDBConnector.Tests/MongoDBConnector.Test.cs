@@ -1,6 +1,6 @@
 ﻿using Xunit;
 using Testcontainers.MongoDb;
-
+using ConnectorLib = MongoDBConnector.MongoDBConnector;
 
 namespace MongoDBConnector.Tests
 {
@@ -19,8 +19,9 @@ namespace MongoDBConnector.Tests
         [Fact]
         public void Ping_ShouldReturnTrue_WhenMongoDBIsRunning()
         {
-            var connector = new MongoDBConnector(_mongoDbContainer.GetConnectionString());
+            var connector = new ConnectorLib(_mongoDbContainer.GetConnectionString());
             Assert.True(connector.Ping());
         }
     }
 }
+
