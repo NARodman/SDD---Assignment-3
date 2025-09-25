@@ -22,6 +22,15 @@ namespace MongoDBConnector.Tests
             var connector = new ConnectorLib(_mongoDbContainer.GetConnectionString());
             Assert.True(connector.Ping());
         }
+
+        [Fact]
+        public void Ping_ShouldReturnFalse_WhenMongoDBIsNotRunning()
+        {
+            var connector = new ConnectorLib("mongodb://invalid:27017");
+            Assert.False(connector.Ping());
+        }
     }
+
 }
+
 
