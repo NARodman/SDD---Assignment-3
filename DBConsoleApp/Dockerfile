@@ -10,7 +10,7 @@ WORKDIR /src
 COPY . .
 
 # Publish the console app (path adjusted)
-RUN dotnet publish DBConsoleApp.csproj -c Release -o /app/publish
+RUN dotnet publish DBConsoleApp/DBConsoleApp.csproj -c Release -o /app/publish
 
 # Final stage
 FROM base AS final
