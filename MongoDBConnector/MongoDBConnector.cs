@@ -5,7 +5,7 @@ using DatabaseConnectors;
 
 namespace MongoDBConnector
 {
-    public class MongoDBConnector
+    public class MongoDBConnector : IDBConnector
     {
         private readonly MongoClient _client;
 
